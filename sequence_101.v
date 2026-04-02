@@ -31,11 +31,7 @@ reg [1:0] pre;
 reg [1:0] nxt;
 
 
-clk_div div(
-.clk_out(clk),
-.clk_in(clk50),
-.clk_led(clk_led)
-);
+
 
 //input block
 always@(in,pre)begin
