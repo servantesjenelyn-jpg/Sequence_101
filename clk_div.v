@@ -7,7 +7,6 @@ and divide it to produce 1Hz clock output.
 
 Design Engineer:
 Doctora, France Austin D.
-Servantes, Jenenlyn B.
 
 Date:
 18 Feb 2026
@@ -19,8 +18,8 @@ output reg clk_out=1'b0;
 output reg clk_led=1'b0;
 
 //1s clock @50MHz
-parameter integer TICKS_500MS =75_000_000;// no. of ticks per 0.5s
-reg [26:0]tick_cnt = 27'b0;// count 0...24_999_999
+parameter integer TICKS_500MS =75_000_000;
+reg [26:0]tick_cnt = 27'b0;
 always@(posedge clk_in)begin
   if(tick_cnt==TICKS_500MS-1)begin
 	clk_out <= ~clk_out;
