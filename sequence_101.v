@@ -12,13 +12,11 @@ Servantes,Jenelyn
 Date: 
 31 Mar 2026
 ===========================================*/
-module sequence_101(in,out,state,rst,clk50,clk_out,clk_led);
+module sequence_101(in,out,state,rst,clk);
 //ports
 input in;
 input rst;
-input clk50;
-output clk_out;
-output clk_led;
+input clk;
 output reg out;
 output reg [1:0]state;
 
@@ -31,19 +29,13 @@ reg [1:0] pre;
 reg [1:0] nxt;
 
 
-clk_div div(
-.clk_out(clk),
-.clk_in(clk50),
-.clk_led(clk_led)
-);
-
 //input block
 always@(in,pre)begin
 case(pre)
 s0: nxt = in? s1:s0;
-s1: nxt = in? s0:s2;
-s2: nxt = in? s3:s0;
-s3: nxt = in? s1:s0;
+s1: nxt = in? s0:s2;    //remembers 1
+s2: nxt = in? s3:s0;    //remembers 2
+s3: nxt = in? s1:s0;   //10
 default: nxt = s0;
 endcase
 end

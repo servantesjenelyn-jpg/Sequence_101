@@ -19,20 +19,21 @@ input clk_in;
 output reg clk_out=1'b0;
 output reg clk_led=1'b0;
 
-//1s clock @50MHz
-parameter integer TICKS_500MS =75_000_000;
-reg [26:0]tick_cnt = 27'b0;
+//Division Factor
+parameter integer FREQ_IN      = 50_000_000;
+parameter integer PERIOD_OUT     = 1;
+parameter integer TICKS    = (FREQ_IN*PERIOD_OUT);
+
+//CLOCK GENERATOR
+integer tick_cnt = 0;
+
 always@(posedge clk_in)begin
-  if(tick_cnt==TICKS_500MS-1)begin
-	clk_out <= ~clk_out;
-	clk_led <= ~clk_led;
-	tick_cnt <= 27'b0;
+   if(tick_cnt == TICKS-1)begin
+clk_out <=~clk_out;
+clk_led <=~clk_led;
+tick_cnt <=0;
 end
- else
-   tick_cnt = tick_cnt + 27'b1;
-
-
-
+else tick_cnt<= tick_cnt + 1;
 
 end
 
